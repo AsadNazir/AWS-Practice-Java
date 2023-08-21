@@ -11,33 +11,31 @@ import java.util.List;
 
 public class SQS {
 
-    public static void main(String[] args) {
-        String queueUrl = "http://localhost:4566/000000000000/AsadQueue";
-
-        // Initialize the SQS client
-        AmazonSQS sqs = AmazonSQSClientBuilder.standard()
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(
-                "http://localhost:4566", "eu-central-1"))
-                .build();
-
-        try {
-            SQS s = new SQS();
-
-            s.sendMsgToSqs("Hello from SQS", queueUrl,sqs);
-            s.receiveMsg( queueUrl,sqs);
-
-        } catch (AmazonClientException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        String queueUrl = "http://localhost:4566/000000000000/AsadQueue";
+//
+//        // Initialize the SQS client
+//        AmazonSQS sqs = AmazonSQSClientBuilder.standard()
+//                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(
+//                "http://localhost:4566", "eu-central-1"))
+//                .build();
+//
+//        try {
+//            SQS s = new SQS();
+//
+//            s.sendMsgToSqs("Hello from SQS", queueUrl,sqs);
+//            s.receiveMsg( queueUrl,sqs);
+//
+//        } catch (AmazonClientException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void sendMsgToSqs(String msg, String queueUrl, AmazonSQS sqs) {
 
         SendMessageRequest sendMessageRequest = new SendMessageRequest()
                 .withQueueUrl(queueUrl)
                 .withMessageBody("Hello, World!");
-
-
         sqs.sendMessage(sendMessageRequest);
     }
 
